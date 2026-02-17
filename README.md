@@ -26,10 +26,10 @@ All Java files organized by package (db, model, controller, util)
 Resources in src/main/resources
 
 ## Team Members
-- Developer 1: Database & DAO Layer
-- Developer 2: Model & Utilities
-- Developer 3: Forms & Controllers
-- Developer 4: Main Window & Integration
+- Alpatson Cobbina Siaw: Main Window & Integration
+- Kelvin AWUDJA: Database & DAO Layer
+- Kwabena ANOKYE: Model & Utilities
+- Josephine Ama Gyanewah GYASI: Forms & Controllers
 ```
 
 **File 8: .gitignore**

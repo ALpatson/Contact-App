@@ -58,16 +58,12 @@ public class MainController {
      */
     @FXML
     public void initialize() {
-        // Set up the table columns to map to Person properties
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("idperson"));
+        // Set up ONLY the visible table columns
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstname"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
-        nickNameColumn.setCellValueFactory(new PropertyValueFactory<>("nickname"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<>("emailAddress"));
-        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
 
-        // Load sample data (Developer 1 will replace this with database calls)
+        // Load sample data
         loadSampleData();
     }
 
@@ -102,6 +98,31 @@ public class MainController {
 
         contactsTable.setItems(contacts);
     }
+    
+    /**
+     * Handle the View Details button click.
+     * Shows all contact information.
+    */
+    @FXML
+    private void handleViewDetails() {
+        Person selected = contactsTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert("No Selection", "Please select a contact to view details.");
+            return;
+        }
+
+        String details = "Contact Details:\n\n" +
+                "ID: " + selected.getIdperson() + "\n" +
+                "First Name: " + selected.getFirstname() + "\n" +
+                "Last Name: " + selected.getLastname() + "\n" +
+                "Nickname: " + selected.getNickname() + "\n" +
+                "Phone: " + selected.getPhoneNumber() + "\n" +
+                "Email: " + selected.getEmailAddress() + "\n" +
+                "Address: " + selected.getAddress() + "\n" +
+                "Birth Date: " + (selected.getBirthDate() != null ? selected.getBirthDate() : "N/A");
+
+        showAlert("Contact Details", details);
+    }
 
     /**
      * Handle the Add button click.
@@ -109,7 +130,7 @@ public class MainController {
      */
     @FXML
     private void handleAddContact() {
-        showAlert("Add Contact", "Add contact dialog will open here.\nDeveloper 3 will implement this.");
+        showAlert("Add Contact", "Add contact dialog will open here.\nJosephine will implement this.");
     }
 
     /**
@@ -124,7 +145,7 @@ public class MainController {
             return;
         }
         showAlert("Edit Contact", "Editing: " + selected.getFirstname() + " " + selected.getLastname() + 
-                 "\nEdit dialog will open here.\nDeveloper 3 will implement this.");
+                 "\nEdit dialog will open here.\nJosephine will implement this.");
     }
 
     /**
@@ -139,7 +160,7 @@ public class MainController {
             return;
         }
         showAlert("Delete Contact", "Deleting: " + selected.getFirstname() + " " + selected.getLastname() + 
-                 "\nDelete operation will be performed.\nDeveloper 1 will implement this.");
+                 "\nDelete operation will be performed.\nDani will implement this.");
         // TODO: Call PersonDAO.delete(selected.getIdperson());
     }
 

@@ -12,13 +12,15 @@
 <BorderPane xmlns="http://javafx.com/javafx/17" 
             xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="com.contactapp.controller.MainController"
-            stylesheets="@styles.css">
+            stylesheets="@/com/contactapp/view/styles.css">
 
     <!-- Top section: Title -->
     <top>
         <VBox style="-fx-padding: 10;" styleClass="header">
-            <Label text="Contact" 
+            <Label text="Contact Management System" 
                    style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+            <Label text="Manage your contacts efficiently" 
+                   style="-fx-font-size: 12; -fx-text-fill: #666666;"/>
         </VBox>
     </top>
 
@@ -26,36 +28,24 @@
     <center>
         <VBox style="-fx-padding: 10; -fx-spacing: 10;">
             
-            <!-- Contacts Table -->
+            <!-- Contacts Table - Simple phone app style -->
             <TableView fx:id="contactsTable" VBox.vgrow="ALWAYS" styleClass="table-view">
                 
                 <columns>
-                    <!-- ID Column -->
-                    <TableColumn fx:id="idColumn" 
-                                text="ID" 
-                                prefWidth="50" 
-                                sortType="ASCENDING"/>
-
                     <!-- First Name Column -->
                     <TableColumn fx:id="firstNameColumn" 
                                 text="First Name" 
-                                prefWidth="120"/>
+                                prefWidth="150"/>
 
                     <!-- Last Name Column -->
                     <TableColumn fx:id="lastNameColumn" 
                                 text="Last Name" 
-                                prefWidth="120"/>
+                                prefWidth="150"/>
 
                     <!-- Phone Column -->
                     <TableColumn fx:id="phoneColumn" 
                                 text="Phone Number" 
-                                prefWidth="130"/>
-                    
-
-                    <!-- Address Column -->
-                    <TableColumn fx:id="addressColumn" 
-                                text="Address" 
-                                prefWidth="180"/>
+                                prefWidth="200"/>
                 </columns>
 
             </TableView>
@@ -74,6 +64,13 @@
                         text="Add Contact" 
                         style="-fx-padding: 10; -fx-font-size: 12;"
                         onAction="#handleAddContact"
+                        styleClass="btn-primary"/>
+
+                <!-- View Details Button (new) -->
+                <Button fx:id="viewButton" 
+                        text="View Details" 
+                        style="-fx-padding: 10; -fx-font-size: 12;"
+                        onAction="#handleViewDetails"
                         styleClass="btn-primary"/>
 
                 <!-- Edit Button -->

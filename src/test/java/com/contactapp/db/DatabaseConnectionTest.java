@@ -11,3 +11,4 @@ package com.contactapp.db;
 public class DatabaseConnectionTest {
     
 }
+

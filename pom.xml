@@ -15,9 +15,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Let's add variables, shall we -->
-        <javafx.version>25</javafx.version>
+        <javafx.version>21</javafx.version>
         <!-- Instead of relying on the source/target properties, we use the newer release property from JEP 247 (see https://openjdk.org/jeps/247) -->
-        <java.release>25</java.release>
+        <java.release>21</java.release>
     </properties>
 
     <dependencies>

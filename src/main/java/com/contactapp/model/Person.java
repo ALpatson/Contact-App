@@ -13,6 +13,24 @@ public class Person {
     private String emailAddress;
     private String address;
     private String birthDate;
+    
+    public Person(int idperson, String lastname, String firstname,
+            String nickname, String phoneNumber,
+            String address, String emailAddress,
+            String birthDate) {
+
+  this.idperson = idperson;
+  this.lastname = lastname;
+  this.firstname = firstname;
+  this.nickname = nickname;
+  this.phoneNumber = phoneNumber;
+  this.address = address;
+  this.emailAddress = emailAddress;
+  this.birthDate = birthDate;
+}
+    public Person() {
+    }
+
 
     // Getters
     public int getIdperson() { return idperson; }

@@ -1,14 +1,17 @@
 package com.contactapp.db;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-/**
- *
- * @author cobbi
- */
 public class DatabaseConnection {
-    
+	 // SQLite database file
+    private static final String URL = "jdbc:sqlite:contactapp.db";
+
+    /**
+     * Establish connection to SQLite database
+     */
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL);
+    }
 }

@@ -2,20 +2,28 @@ package com.contactapp;
 
 import java.io.IOException;
 import javafx.application.Application;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.net.URL;
+import com.contactapp.db.DatabaseInitializer;
+
 
 /**
  * Main application entry point for the Contact App.
  * Loads the main window and initializes the JavaFX application.
  */
 public class Main extends Application {
+
     private static BorderPane root;
     private static Scene scene;
+
     @Override
+       public void init() throws Exception {
+           DatabaseInitializer.initialize();
+           }
     public void start(Stage primaryStage) throws Exception {
         try {
             // Load the MainWindow.fxml file from the view package

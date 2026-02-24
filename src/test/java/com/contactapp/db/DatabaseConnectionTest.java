@@ -1,14 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.contactapp.db;
 
-/**
- *
- * @author cobbi
- */
-public class DatabaseConnectionTest {
-    
-}
+import org.junit.Test;
 
+import java.sql.Connection;
+
+import static org.junit.Assert.*;
+
+public class DatabaseConnectionTest {
+
+    @Test
+ public   void testConnectionIsNotNull() throws Exception {
+        Connection conn = DatabaseConnection.getConnection();
+        assertNotNull(conn);
+        conn.close();
+    }
+}

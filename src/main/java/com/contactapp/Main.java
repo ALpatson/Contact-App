@@ -1,5 +1,6 @@
 package com.contactapp;
 
+import java.io.IOException;
 import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
@@ -15,26 +16,21 @@ import com.contactapp.db.DatabaseInitializer;
  * Loads the main window and initializes the JavaFX application.
  */
 public class Main extends Application {
-	 @Override
-	    public void init() throws Exception {
-	        DatabaseInitializer.initialize();
-	        }
+
+    private static BorderPane root;
+    private static Scene scene;
+
     @Override
+       public void init() throws Exception {
+           DatabaseInitializer.initialize();
+           }
     public void start(Stage primaryStage) throws Exception {
         try {
             // Load the MainWindow.fxml file from the view package
-            FXMLLoader loader = new FXMLLoader();
-            URL fxmlLocation = Main.class.getResource("/com/contactapp/view/MainWindow.fxml");
-            
-            if (fxmlLocation == null) {
-                throw new RuntimeException("Cannot find MainWindow.fxml at /com/contactapp/view/MainWindow.fxml");
-            }
-            
-            loader.setLocation(fxmlLocation);
-            BorderPane root = loader.load();
+            root = loadFXML("MainLayout");
             
             // Create the scene with the loaded FXML
-            Scene scene = new Scene(root, 1000, 600);
+            scene = new Scene(root, 640, 480);
             
             // Load the CSS stylesheet from the view package
             URL cssLocation = Main.class.getResource("/com/contactapp/view/styles.css");
@@ -46,15 +42,32 @@ public class Main extends Application {
             primaryStage.setTitle("Contact App");
             primaryStage.setScene(scene);
             primaryStage.show();
+            Main.showView("MainWindow");
             
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
             System.err.println("Error starting application: " + e.getMessage());
             throw e;
         }
     }
+    
+    private static <T> T loadFXML(String fxml) throws IOException {
+		// As we will use this method a lot, and we have all our view in a specific
+		// package, let's put it there to save some typing :)
+		FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/contactapp/view/" + fxml + ".fxml"));
+		return fxmlLoader.load();
+	}
 
     public static void main(String[] args) {
         launch(args);
     }
+    
+    
+
+    public static void showView(String viewName) {
+        try {
+            root.setCenter(loadFXML(viewName));
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
+        }
+}
 }

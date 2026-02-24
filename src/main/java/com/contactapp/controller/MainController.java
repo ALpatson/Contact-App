@@ -1,5 +1,6 @@
 package com.contactapp.controller;
 
+import com.contactapp.Main;
 import com.contactapp.model.Person;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -130,7 +131,7 @@ public class MainController {
      */
     @FXML
     private void handleAddContact() {
-        showAlert("Add Contact", "Add contact dialog will open here.\nJosephine will implement this.");
+        Main.showView("AddPersonForm");
     }
 
     /**
@@ -144,8 +145,7 @@ public class MainController {
             showAlert("No Selection", "Please select a contact to edit.");
             return;
         }
-        showAlert("Edit Contact", "Editing: " + selected.getFirstname() + " " + selected.getLastname() + 
-                 "\nEdit dialog will open here.\nJosephine will implement this.");
+        Main.showView("UpdatePersonForm");
     }
 
     /**

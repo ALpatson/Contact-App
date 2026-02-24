@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="460.0" prefWidth="600.0" style="-fx-background-color: #edf7f6;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.contactapp.controller.AddPersonController">
+<AnchorPane id="AnchorPane" prefHeight="460.0" prefWidth="600.0" style="-fx-background-color: #edf7f6;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="23.0" layoutY="-1.0" prefHeight="67.0" prefWidth="365.0" text="Add New Contact" textFill="#a28089">
          <font>
@@ -31,7 +31,7 @@
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="firstNameField" layoutX="122.0" layoutY="76.0" prefHeight="25.0" prefWidth="349.0" promptText="First name" style="-fx-background-color: white;">
+      <TextField layoutX="122.0" layoutY="76.0" prefHeight="25.0" prefWidth="349.0" promptText="First name" style="-fx-background-color: white;">
          <effect>
             <DropShadow height="10.3" radius="4.405" width="9.32">
                <color>
@@ -40,7 +40,7 @@
             </DropShadow>
          </effect>
       </TextField>
-      <TextField fx:id="lastNameField" layoutX="122.0" layoutY="120.0" prefHeight="25.0" prefWidth="349.0" promptText="Last name" style="-fx-background-color: white;">
+      <TextField layoutX="122.0" layoutY="120.0" prefHeight="25.0" prefWidth="349.0" promptText="Last name" style="-fx-background-color: white;">
          <effect>
             <DropShadow height="10.3" radius="4.405" width="9.32">
                <color>
@@ -49,7 +49,7 @@
             </DropShadow>
          </effect>
       </TextField>
-      <TextField fx:id="nicknameField" layoutX="122.0" layoutY="164.0" prefHeight="25.0" prefWidth="349.0" promptText="Nickname" style="-fx-background-color: white;">
+      <TextField layoutX="122.0" layoutY="164.0" prefHeight="25.0" prefWidth="349.0" promptText="Nickname" style="-fx-background-color: white;">
          <effect>
             <DropShadow height="10.3" radius="4.405" width="9.32">
                <color>
@@ -73,7 +73,7 @@
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="phoneField" layoutX="152.0" layoutY="208.0" prefHeight="25.0" prefWidth="319.0" promptText="Phone number" style="-fx-background-color: white;">
+      <TextField layoutX="152.0" layoutY="208.0" prefHeight="25.0" prefWidth="319.0" promptText="Phone number" style="-fx-background-color: white;">
          <effect>
             <DropShadow height="10.3" radius="4.405" width="9.32">
                <color>
@@ -82,7 +82,7 @@
             </DropShadow>
          </effect>
       </TextField>
-      <TextField fx:id="addressField" layoutX="123.0" layoutY="249.0" prefHeight="25.0" prefWidth="349.0" promptText="Address" style="-fx-background-color: white;">
+      <TextField layoutX="123.0" layoutY="249.0" prefHeight="25.0" prefWidth="349.0" promptText="Address" style="-fx-background-color: white;">
          <effect>
             <DropShadow height="10.3" radius="4.405" width="9.32">
                <color>
@@ -91,7 +91,7 @@
             </DropShadow>
          </effect>
       </TextField>
-      <TextField fx:id="emailField" layoutX="153.0" layoutY="289.0" prefHeight="25.0" prefWidth="319.0" promptText="Email" style="-fx-background-color: white;">
+      <TextField layoutX="153.0" layoutY="289.0" prefHeight="25.0" prefWidth="319.0" promptText="Address" style="-fx-background-color: white;">
          <effect>
             <DropShadow height="10.3" radius="4.405" width="9.32">
                <color>
@@ -105,7 +105,7 @@
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="birthDateField" layoutX="154.0" layoutY="328.0" prefHeight="25.0" prefWidth="319.0" promptText="Date of birth" style="-fx-background-color: white;">
+      <TextField layoutX="154.0" layoutY="328.0" prefHeight="25.0" prefWidth="319.0" promptText="Date of birth" style="-fx-background-color: white;">
          <effect>
             <DropShadow height="10.3" radius="4.405" width="9.32">
                <color>
@@ -114,13 +114,13 @@
             </DropShadow>
          </effect>
       </TextField>
-      <Button fx:id="saveButton" layoutX="491.0" layoutY="405.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #a28089;" text="Save " textAlignment="CENTER" textFill="#edf6f7">
+      <Button layoutX="491.0" layoutY="405.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #a28089;" text="Save " textAlignment="CENTER" textFill="#edf6f7">
          <font>
             <Font name="Cambria Bold" size="18.0" />
          </font>
       </Button>
       <Line endX="28.333343505859375" endY="-3.814697265625E-6" layoutX="191.0" layoutY="60.0" startX="-133.0" stroke="#a28089" strokeWidth="4.0" style="-fx-fill: #a28089;" />
-      <Button fx:id="cancelButton" layoutX="397.0" layoutY="405.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #a28089;" text="Cancel" textAlignment="CENTER" textFill="#edf6f7">
+      <Button layoutX="397.0" layoutY="405.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #a28089;" text="Cancel" textAlignment="CENTER" textFill="#edf6f7">
          <font>
             <Font name="Cambria Bold" size="18.0" />
          </font>

@@ -2,18 +2,14 @@ package com.contactapp.controller;
 
 import com.contactapp.Main;
 import com.contactapp.model.Person;
-import com.contactapp.db.PersonDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * Controller for the main window.
@@ -56,8 +52,6 @@ public class MainController {
 
     @FXML
     private Button refreshButton;
-    
-    private PersonDAO dao = new PersonDAO();
 
     /**
      * Initialize the controller and set up the table columns.
@@ -70,27 +64,13 @@ public class MainController {
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
-        // Load data from database
-        loadContactsFromDatabase();
-    }
-
-    /**
-     * Load contacts from the database and display in table.
-     */
-    private void loadContactsFromDatabase() {
-        try {
-            List<Person> contacts = dao.getAllPersons();
-            ObservableList<Person> observableContacts = FXCollections.observableArrayList(contacts);
-            contactsTable.setItems(observableContacts);
-        } catch (Exception e) {
-            System.err.println("Error loading contacts: " + e.getMessage());
-            loadSampleData();  // Fall back to sample data if database fails
-        }
+        // Load sample data
+        loadSampleData();
     }
 
     /**
      * Load sample data into the table for testing purposes.
-     * Used as fallback if database is unavailable.
+     * Developer 1 will replace this with actual database queries.
      */
     private void loadSampleData() {
         ObservableList<Person> contacts = FXCollections.observableArrayList();
@@ -123,7 +103,7 @@ public class MainController {
     /**
      * Handle the View Details button click.
      * Shows all contact information.
-     */
+    */
     @FXML
     private void handleViewDetails() {
         Person selected = contactsTable.getSelectionModel().getSelectedItem();
@@ -147,21 +127,16 @@ public class MainController {
 
     /**
      * Handle the Add button click.
-     * Opens the add person form.
+     * Opens a dialog to add a new contact.
      */
     @FXML
     private void handleAddContact() {
-        try {
-            Main.showView("AddPersonForm");
-        } catch (Exception e) {
-            showAlert("Error", "Failed to open add contact form: " + e.getMessage());
-            e.printStackTrace();
-        }
+        Main.showView("AddPersonForm");
     }
 
     /**
      * Handle the Edit button click.
-     * Opens the edit form with selected contact's data.
+     * Opens a dialog to edit the selected contact.
      */
     @FXML
     private void handleEditContact() {
@@ -170,23 +145,7 @@ public class MainController {
             showAlert("No Selection", "Please select a contact to edit.");
             return;
         }
-        
-        try {
-            // Load the update form
-            Main.showView("UpdatePersonForm");
-            
-            // Pass the selected person to the controller
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/contactapp/view/UpdatePersonForm.fxml"));
-            loader.load();
-            UpdatePersonController controller = loader.getController();
-            if (controller != null) {
-                controller.setPerson(selected);
-            }
-            
-        } catch (Exception e) {
-            showAlert("Error", "Failed to open edit contact form: " + e.getMessage());
-            e.printStackTrace();
-        }
+        Main.showView("UpdatePersonForm");
     }
 
     /**
@@ -200,21 +159,9 @@ public class MainController {
             showAlert("No Selection", "Please select a contact to delete.");
             return;
         }
-        
-        try {
-            // Delete from database
-            dao.deletePerson(selected.getIdperson());
-            
-            // Show success message
-            showAlert("Success", "Contact deleted: " + selected.getFirstname() + " " + selected.getLastname());
-            
-            // Refresh the table
-            loadContactsFromDatabase();
-            
-        } catch (Exception e) {
-            showAlert("Error", "Failed to delete contact: " + e.getMessage());
-            e.printStackTrace();
-        }
+        showAlert("Delete Contact", "Deleting: " + selected.getFirstname() + " " + selected.getLastname() + 
+                 "\nDelete operation will be performed.\nDani will implement this.");
+        // TODO: Call PersonDAO.delete(selected.getIdperson());
     }
 
     /**
@@ -223,13 +170,8 @@ public class MainController {
      */
     @FXML
     private void handleRefresh() {
-        try {
-            loadContactsFromDatabase();
-            showAlert("Success", "Contact list refreshed!");
-        } catch (Exception e) {
-            showAlert("Error", "Failed to refresh contacts: " + e.getMessage());
-            e.printStackTrace();
-        }
+        loadSampleData();
+        showAlert("Refresh", "Contact list refreshed!");
     }
 
     /**

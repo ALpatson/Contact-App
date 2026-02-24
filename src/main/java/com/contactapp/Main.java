@@ -22,7 +22,7 @@ public class Main extends Application {
 
     @Override
        public void init() throws Exception {
-           DatabaseInitializer.initializeDatabase();
+           DatabaseInitializer.initialize();
            }
     public void start(Stage primaryStage) throws Exception {
         try {

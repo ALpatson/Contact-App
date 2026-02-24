@@ -17,9 +17,10 @@
     <!-- Top section: Title -->
     <top>
         <VBox style="-fx-padding: 10;" styleClass="header">
-            <Label text="Contact" 
+            <Label text="Contact Management System" 
                    style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
-            
+            <Label text="Manage your contacts efficiently" 
+                   style="-fx-font-size: 12; -fx-text-fill: #666666;"/>
         </VBox>
     </top>
 

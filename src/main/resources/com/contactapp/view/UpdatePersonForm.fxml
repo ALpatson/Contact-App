@@ -116,5 +116,6 @@
          </font>
       </Button>
       <DatePicker fx:id="birthDatePicker" layoutX="152.0" layoutY="328.0" promptText="Date of Birth" />
+      <AnchorPane layoutX="49.0" layoutY="54.0" prefHeight="3.0" prefWidth="150.0" style="-fx-background-color: #a28089;" />
    </children>
 </AnchorPane>

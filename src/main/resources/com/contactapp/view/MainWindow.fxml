@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -13,17 +14,18 @@
 
 <BorderPane prefHeight="460.0" prefWidth="650.0" stylesheets="@/com/contactapp/view/styles.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.contactapp.controller.MainController">
 
-    <!-- ===== TOP HEADER (NOW JUST CONTACT) ===== -->
+    <!-- ===== TOP HEADER  ===== -->
     <top>
         <VBox prefHeight="69.0" prefWidth="711.0" styleClass="top-container">
             <padding>
                 <Insets bottom="10" left="30" right="30" top="25" />
             </padding>
 
-            <Label styleClass="main-title" text="Contact">
+            <Label styleClass="main-title" text="Contact" textFill="#eababe">
             <font>
                <Font name="System Bold" size="30.0" />
             </font></Label>
+            <AnchorPane layoutX="49.0" layoutY="54.0" prefHeight="3.0" prefWidth="150.0" style="-fx-background-color: #a28089;" />
         </VBox>
     </top>
 
@@ -57,7 +59,7 @@
                 <!-- Push buttons to bottom -->
                 <Region prefHeight="107.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
 
-                <Button fx:id="addButton" onAction="#handleAddContact" styleClass="btn-primary" text="Add ">
+                <Button fx:id="addButton" onAction="#handleAddContact" styleClass="btn-first" text="Add ">
                <VBox.margin>
                   <Insets />
                </VBox.margin></Button>

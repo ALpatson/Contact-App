@@ -3,16 +3,15 @@ package com.contactapp.controller;
 import com.contactapp.Main;
 import com.contactapp.model.Person;
 import com.contactapp.db.PersonDAO;
+import com.contactapp.util.PersonContext;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -132,17 +131,15 @@ public class MainController {
             return;
         }
 
-        String details = "Contact Details:\n\n" +
-                "ID: " + selected.getIdperson() + "\n" +
-                "First Name: " + selected.getFirstname() + "\n" +
-                "Last Name: " + selected.getLastname() + "\n" +
-                "Nickname: " + selected.getNickname() + "\n" +
-                "Phone: " + selected.getPhoneNumber() + "\n" +
-                "Email: " + selected.getEmailAddress() + "\n" +
-                "Address: " + selected.getAddress() + "\n" +
-                "Birth Date: " + (selected.getBirthDate() != null ? selected.getBirthDate() : "N/A");
-
-        showAlert("Contact Details", details);
+        try {
+            // Load the update form
+            PersonContext.setSelectedPerson(selected);
+            Main.showView("ViewPersonDetails");
+            
+        } catch (Exception e) {
+            showAlert("Error", "Failed to open edit contact form: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -173,15 +170,8 @@ public class MainController {
         
         try {
             // Load the update form
+            PersonContext.setSelectedPerson(selected);
             Main.showView("UpdatePersonForm");
-            
-            // Pass the selected person to the controller
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/contactapp/view/UpdatePersonForm.fxml"));
-            loader.load();
-            UpdatePersonController controller = loader.getController();
-            if (controller != null) {
-                controller.setPerson(selected);
-            }
             
         } catch (Exception e) {
             showAlert("Error", "Failed to open edit contact form: " + e.getMessage());

@@ -54,7 +54,7 @@ public class PersonDAO {
         """;
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, person.getLastname());
             stmt.setString(2, person.getFirstname());
@@ -65,6 +65,12 @@ public class PersonDAO {
             stmt.setString(7, person.getBirthDate());
 
             stmt.executeUpdate();
+            
+            try (ResultSet keys = stmt.getGeneratedKeys()) {
+                if (keys.next()) {
+                    person.setIdperson(keys.getInt(1));
+                }
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -49,7 +49,7 @@
          </font>
       </Label>
       <Line endX="28.333343505859375" endY="-3.814697265625E-6" layoutX="174.0" layoutY="60.0" startX="-133.0" stroke="#a28089" strokeWidth="4.0" style="-fx-fill: #a28089;" />
-      <Button fx:id="backButton" layoutX="397.0" layoutY="404.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #a28089;" text="Back" textAlignment="CENTER" textFill="#edf6f7">
+      <Button fx:id="backButton" layoutX="386.0" layoutY="404.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #a28089;" text="Back" textAlignment="CENTER" textFill="#edf6f7">
          <font>
             <Font name="Cambria Bold" size="18.0" />
          </font>

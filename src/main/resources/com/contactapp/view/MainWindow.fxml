@@ -7,95 +7,72 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" 
-            xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="com.contactapp.controller.MainController"
-            stylesheets="@/com/contactapp/view/styles.css">
+<BorderPane prefHeight="460.0" prefWidth="650.0" stylesheets="@/com/contactapp/view/styles.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.contactapp.controller.MainController">
 
-    <!-- Top section: Title -->
+    <!-- ===== TOP HEADER (NOW JUST CONTACT) ===== -->
     <top>
-        <VBox style="-fx-padding: 10;" styleClass="header">
-            <Label text="Contact" 
-                   style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
-            
+        <VBox prefHeight="69.0" prefWidth="711.0" styleClass="top-container">
+            <padding>
+                <Insets bottom="10" left="30" right="30" top="25" />
+            </padding>
+
+            <Label styleClass="main-title" text="Contact">
+            <font>
+               <Font name="System Bold" size="30.0" />
+            </font></Label>
         </VBox>
     </top>
 
-    <!-- Center section: Table and Data -->
+    <!-- ===== MAIN AREA ===== -->
     <center>
-        <VBox style="-fx-padding: 10; -fx-spacing: 10;">
-            
-            <!-- Contacts Table - Simple phone app style -->
-            <TableView fx:id="contactsTable" VBox.vgrow="ALWAYS" styleClass="table-view">
-                
-                <columns>
-                    <!-- First Name Column -->
-                    <TableColumn fx:id="firstNameColumn" 
-                                text="First Name" 
-                                prefWidth="150"/>
+        <HBox prefHeight="383.0" prefWidth="711.0" spacing="40" styleClass="main-area">
+            <padding>
+                <Insets bottom="30" left="30" right="30" top="10" />
+            </padding>
 
-                    <!-- Last Name Column -->
-                    <TableColumn fx:id="lastNameColumn" 
-                                text="Last Name" 
-                                prefWidth="150"/>
+            <!-- LEFT : TABLE -->
+            <VBox HBox.hgrow="ALWAYS">
 
-                    <!-- Phone Column -->
-                    <TableColumn fx:id="phoneColumn" 
-                                text="Phone Number" 
-                                prefWidth="200"/>
-                </columns>
+                <TableView fx:id="contactsTable" prefHeight="339.0" prefWidth="505.0" styleClass="table-view" VBox.vgrow="ALWAYS">
 
-            </TableView>
+                    <columns>
+                        <TableColumn fx:id="firstNameColumn" prefWidth="140.0" text="First Name" />
 
-        </VBox>
+                        <TableColumn fx:id="lastNameColumn" prefWidth="130.0" text="Last Name" />
+
+                        <TableColumn fx:id="phoneColumn" prefWidth="170.0" text="Phone Number" />
+                    </columns>
+
+                </TableView>
+
+            </VBox>
+
+            <!-- RIGHT : BUTTON PANEL -->
+            <VBox alignment="BOTTOM_CENTER" prefHeight="329.0" prefWidth="149.0" spacing="15">
+
+                <!-- Push buttons to bottom -->
+                <Region prefHeight="107.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+
+                <Button fx:id="addButton" onAction="#handleAddContact" styleClass="btn-primary" text="Add ">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Button>
+
+                <Button fx:id="viewButton" onAction="#handleViewDetails" styleClass="btn-primary" text="View Details" />
+
+                <Button fx:id="editButton" onAction="#handleEditContact" styleClass="btn-primary" text="Edit " />
+
+                <Button fx:id="refreshButton" onAction="#handleRefresh" styleClass="btn-secondary" text="Refresh" />
+
+                <Button fx:id="deleteButton" onAction="#handleDeleteContact" styleClass="btn-danger" text="Delete " />
+
+            </VBox>
+
+        </HBox>
     </center>
-
-    <!-- Bottom section: Action Buttons -->
-    <bottom>
-        <VBox style="-fx-padding: 10;" styleClass="footer">
-            
-            <HBox spacing="10" style="-fx-padding: 10;">
-                
-                <!-- Add Button -->
-                <Button fx:id="addButton" 
-                        text="Add Contact" 
-                        style="-fx-padding: 10; -fx-font-size: 12;"
-                        onAction="#handleAddContact"
-                        styleClass="btn-primary"/>
-
-                <!-- View Details Button (new) -->
-                <Button fx:id="viewButton" 
-                        text="View Details" 
-                        style="-fx-padding: 10; -fx-font-size: 12;"
-                        onAction="#handleViewDetails"
-                        styleClass="btn-primary"/>
-
-                <!-- Edit Button -->
-                <Button fx:id="editButton" 
-                        text="Edit Contact" 
-                        style="-fx-padding: 10; -fx-font-size: 12;"
-                        onAction="#handleEditContact"
-                        styleClass="btn-primary"/>
-
-                <!-- Delete Button -->
-                <Button fx:id="deleteButton" 
-                        text="Delete Contact" 
-                        style="-fx-padding: 10; -fx-font-size: 12;"
-                        onAction="#handleDeleteContact"
-                        styleClass="btn-danger"/>
-
-                <!-- Refresh Button -->
-                <Button fx:id="refreshButton" 
-                        text="Refresh" 
-                        style="-fx-padding: 10; -fx-font-size: 12;"
-                        onAction="#handleRefresh"
-                        styleClass="btn-secondary"/>
-
-            </HBox>
-
-        </VBox>
-    </bottom>
 
 </BorderPane>

@@ -10,10 +10,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 
 /**
- * Controller for updating persons.
+ * Controller for the Edit Contact form.
+ * Handles updating existing contact information in the database.
  */
 public class UpdatePersonController {
     
+    // Form input fields
     @FXML
     private TextField firstNameField;
     
@@ -39,16 +41,20 @@ public class UpdatePersonController {
     private Person currentPerson;
     
     /**
-     * Set the person to be edited
+     * Initialize the form when opened.
+     * Retrieve the selected contact and populate all fields with existing data.
      */
     @FXML
     public void initialize() {
+        // Get the contact passed from the main window
         currentPerson = PersonContext.getSelectedPerson();
+        
+        // Fill the form with the contact's current information
         populateFields();
     }
     
     /**
-     * Populate form fields with current person's data
+     * Fill all form fields with the current contact's data.
      */
     private void populateFields() {
         if (currentPerson != null) {
@@ -63,17 +69,17 @@ public class UpdatePersonController {
     }
     
     /**
-     * Handle save button click - updates the contact in database
+     * Save the updated contact information to the database.
      */
     @FXML
     private void handleSave() {
-        // Validate inputs
+        // Verify required fields are filled
         if (firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty()) {
             showAlert("Validation Error", "First name and last name are required!");
             return;
         }
         
-        // Update person object with new values
+        // Update the contact object with new values from form
         currentPerson.setFirstname(firstNameField.getText());
         currentPerson.setLastname(lastNameField.getText());
         currentPerson.setNickname(nicknameField.getText());
@@ -82,18 +88,18 @@ public class UpdatePersonController {
         currentPerson.setEmailAddress(emailField.getText());
         currentPerson.setBirthDate(DateUtil.toDbString(birthDatePicker.getValue()));
         
-        // Update in database
+        // Save changes to database
         dao.updatePerson(currentPerson);
         
-        // Show success message
+        // Confirm success to user
         showAlert("Success", "Contact updated successfully!");
         
-        // Go back to main view
+        // Return to main contact list
         goBackToMainView();
     }
     
     /**
-     * Handle cancel button click - goes back to main view without saving
+     * Cancel editing and discard any changes.
      */
     @FXML
     private void handleCancel() {
@@ -101,7 +107,7 @@ public class UpdatePersonController {
     }
     
     /**
-     * Navigate back to main view
+     * Return to the main contact list view.
      */
     private void goBackToMainView() {
         try {
@@ -112,7 +118,10 @@ public class UpdatePersonController {
     }
     
     /**
-     * Show alert dialog
+     * Display a popup message to the user.
+     * 
+     * @param title The title of the alert window
+     * @param message The message to display
      */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

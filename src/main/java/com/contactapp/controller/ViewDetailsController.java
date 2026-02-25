@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.contactapp.controller;
 
 import com.contactapp.Main;
@@ -12,10 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 /**
- * Controller for viewing person details.
+ * Controller for displaying full contact details.
+ * Shows all contact information in read-only format.
  */
 public class ViewDetailsController {
     
+    // Display labels for contact information (read-only)
     @FXML
     private Label firstNameField;
     
@@ -41,16 +39,20 @@ public class ViewDetailsController {
     private Person currentPerson;
     
     /**
-     * Set the person to be edited
+     * Initialize the view when opened.
+     * Retrieve the selected contact and display all details.
      */
     @FXML
     public void initialize() {
+        // Get the contact passed from the main window
         currentPerson = PersonContext.getSelectedPerson();
+        
+        // Display the contact's information
         populateFields();
     }
     
     /**
-     * Populate form fields with current person's data
+     * Display all contact information in the detail view.
      */
     private void populateFields() {
         if (currentPerson != null) {
@@ -64,14 +66,16 @@ public class ViewDetailsController {
         }
     }
     
+    /**
+     * Open the edit form to modify this contact.
+     */
     @FXML
     private void handleEdit() {
-            Main.showView("UpdatePersonForm");     
+        Main.showView("UpdatePersonForm");
     }
     
-
     /**
-     * Handle cancel button click - goes back to main view without saving
+     * Close the details view and return to main contact list.
      */
     @FXML
     private void handleBack() {
@@ -79,7 +83,7 @@ public class ViewDetailsController {
     }
     
     /**
-     * Navigate back to main view
+     * Return to the main contact list view.
      */
     private void goBackToMainView() {
         try {
@@ -89,4 +93,3 @@ public class ViewDetailsController {
         }
     }
 }
-    

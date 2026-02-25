@@ -15,11 +15,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.List;
 
 /**
- * Controller for the main window.
- * Handles displaying contacts in a table and managing user interactions.
+ * Controller for the main contact list window.
+ * Displays all contacts in a table and handles user actions (add, edit, delete, view).
  */
 public class MainController {
 
+    // Table and column components
     @FXML
     private TableView<Person> contactsTable;
 
@@ -44,6 +45,7 @@ public class MainController {
     @FXML
     private TableColumn<Person, String> addressColumn;
 
+    // Action buttons
     @FXML
     private Button addButton;
 
@@ -59,22 +61,22 @@ public class MainController {
     private PersonDAO dao = new PersonDAO();
 
     /**
-     * Initialize the controller and set up the table columns.
-     * This method is automatically called after the FXML file is loaded.
+     * Initialize the table and load contacts when the window opens.
      */
     @FXML
     public void initialize() {
-        // Set up ONLY the visible table columns
+        // Link table columns to Person object properties
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstname"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
-        // Load data from database
+        // Load all contacts from database
         loadContactsFromDatabase();
     }
 
     /**
-     * Load contacts from the database and display in table.
+     * Fetch all contacts from the database and populate the table.
+     * If database fails, show sample data as fallback.
      */
     private void loadContactsFromDatabase() {
         try {
@@ -83,18 +85,17 @@ public class MainController {
             contactsTable.setItems(observableContacts);
         } catch (Exception e) {
             System.err.println("Error loading contacts: " + e.getMessage());
-            loadSampleData();  // Fall back to sample data if database fails
+            loadSampleData();  // Show sample data if database unavailable
         }
     }
 
     /**
-     * Load sample data into the table for testing purposes.
-     * Used as fallback if database is unavailable.
+     * Load test contacts for demonstration purposes.
+     * Used as backup if database connection fails.
      */
     private void loadSampleData() {
         ObservableList<Person> contacts = FXCollections.observableArrayList();
 
-        // Sample data - this will be replaced with database data
         Person person1 = new Person();
         person1.setIdperson(1);
         person1.setFirstname("John");
@@ -120,8 +121,7 @@ public class MainController {
     }
     
     /**
-     * Handle the View Details button click.
-     * Shows all contact information.
+     * Open the details view for the selected contact.
      */
     @FXML
     private void handleViewDetails() {
@@ -132,19 +132,17 @@ public class MainController {
         }
 
         try {
-            // Load the update form
+            // Pass selected contact to the details view
             PersonContext.setSelectedPerson(selected);
             Main.showView("ViewPersonDetails");
-            
         } catch (Exception e) {
-            showAlert("Error", "Failed to open edit contact form: " + e.getMessage());
+            showAlert("Error", "Failed to open contact details: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * Handle the Add button click.
-     * Opens the add person form.
+     * Open the form to add a new contact.
      */
     @FXML
     private void handleAddContact() {
@@ -157,8 +155,7 @@ public class MainController {
     }
 
     /**
-     * Handle the Edit button click.
-     * Opens the edit form with selected contact's data.
+     * Open the edit form with the selected contact's information.
      */
     @FXML
     private void handleEditContact() {
@@ -169,19 +166,17 @@ public class MainController {
         }
         
         try {
-            // Load the update form
+            // Pass selected contact to the edit form
             PersonContext.setSelectedPerson(selected);
             Main.showView("UpdatePersonForm");
-            
         } catch (Exception e) {
-            showAlert("Error", "Failed to open edit contact form: " + e.getMessage());
+            showAlert("Error", "Failed to open edit form: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * Handle the Delete button click.
-     * Deletes the selected contact from the database.
+     * Delete the selected contact from the database.
      */
     @FXML
     private void handleDeleteContact() {
@@ -192,15 +187,12 @@ public class MainController {
         }
         
         try {
-            // Delete from database
+            // Remove contact from database
             dao.deletePerson(selected.getIdperson());
             
-            // Show success message
+            // Notify user and refresh table
             showAlert("Success", "Contact deleted: " + selected.getFirstname() + " " + selected.getLastname());
-            
-            // Refresh the table
             loadContactsFromDatabase();
-            
         } catch (Exception e) {
             showAlert("Error", "Failed to delete contact: " + e.getMessage());
             e.printStackTrace();
@@ -208,8 +200,7 @@ public class MainController {
     }
 
     /**
-     * Handle the Refresh button click.
-     * Reloads the contact list from the database.
+     * Refresh the contact list from the database.
      */
     @FXML
     private void handleRefresh() {
@@ -223,9 +214,9 @@ public class MainController {
     }
 
     /**
-     * Display an alert dialog to the user.
-     *
-     * @param title The title of the alert
+     * Display a popup message to the user.
+     * 
+     * @param title The title of the message box
      * @param message The message to display
      */
     private void showAlert(String title, String message) {

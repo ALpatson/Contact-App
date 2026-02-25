@@ -10,19 +10,19 @@
 
 /* Top container */
 .top-container {
-    -fx-background-color: transparent;
+    -fx-background-color:  #edf7f6;
 }
 
 /* Main Title */
 .main-title {
     -fx-font-size: 30px;
     -fx-font-weight: bold;
-    -fx-text-fill: #2d2d2d;
+    -fx-text-fill: #eababe;
 }
 
 /* Main layout area */
 .main-area {
-    -fx-background-color: transparent;
+    -fx-background-color:  #edf7f6;
 }
 
 /* ============================= */
@@ -79,10 +79,27 @@
     -fx-min-width: 95px;
 }
 
+
+.btn-first{
+    -fx-background-color: #3d1e31;
+    -fx-text-fill: white;
+    -fx-border-radius: 15 15 0 0;
+    -fx-background-radius: 15 15 0 0;
+}
+
+.btn-first:hover {
+    -fx-background-color: #1e4e8c;
+}
+
+.btn-first:pressed {
+    -fx-background-color: #163b6b;
+}
 /* Primary */
 .btn-primary {
-    -fx-background-color: #2b6cb0;
+    -fx-background-color: #3d1e31;
     -fx-text-fill: white;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
 }
 
 .btn-primary:hover {
@@ -95,8 +112,10 @@
 
 /* Danger */
 .btn-danger {
-    -fx-background-color: #e53e3e;
+    -fx-background-color: #ff5e6c;
     -fx-text-fill: white;
+    -fx-border-radius: 0 0 15 15;
+    -fx-background-radius: 0 0 15 15;
 }
 
 .btn-danger:hover {
@@ -111,6 +130,8 @@
 .btn-secondary {
     -fx-background-color: #7a7a7a;
     -fx-text-fill: white;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
 }
 
 .btn-secondary:hover {

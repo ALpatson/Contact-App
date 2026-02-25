@@ -98,7 +98,7 @@ CREATE TABLE person (
 
 | Developer | Role | Components |
 |-----------|------|------------|
-| **Alpatson Cobbina Siaw** | Team Lead & UI Developer | Main Window, Form Integration, Controllers |
+| **Alpatson Cobbina SIAW** | Team Lead & UI Developer | Main Window, Form Integration, Controllers |
 | **Kelvin AWUDJA** | Database Developer | Database Layer, PersonDAO, Connection Management |
 | **Kwabena ANOKYE** | Model & Utility Developer | Person Model, DateUtil, Comprehensive Testing |
 | **Josephine Ama Gyanewah GYASI** | Forms Developer | Add/Edit Forms, PersonContext, Form Controllers |

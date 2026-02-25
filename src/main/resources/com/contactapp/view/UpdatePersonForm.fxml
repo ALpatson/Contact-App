@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
@@ -104,15 +105,6 @@
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="birthDateField" layoutX="154.0" layoutY="328.0" prefHeight="25.0" prefWidth="319.0" promptText="Date of birth" style="-fx-background-color: white;">
-         <effect>
-            <DropShadow height="10.3" radius="4.405" width="9.32">
-               <color>
-                  <Color opacity="0.4796954393386841" />
-               </color>
-            </DropShadow>
-         </effect>
-      </TextField>
       <Button fx:id="saveButton" layoutX="489.0" layoutY="401.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #a28089;" text="Save " textAlignment="CENTER" textFill="#edf6f7">
          <font>
             <Font name="Cambria Bold" size="18.0" />
@@ -123,5 +115,6 @@
             <Font name="Cambria Bold" size="18.0" />
          </font>
       </Button>
+      <DatePicker fx:id="birthDatePicker" layoutX="152.0" layoutY="328.0" promptText="Date of Birth" />
    </children>
 </AnchorPane>

@@ -2,9 +2,12 @@ package com.contactapp.controller;
 
 import com.contactapp.model.Person;
 import com.contactapp.db.PersonDAO;
+import com.contactapp.util.DateUtil;
+import com.contactapp.util.PersonContext;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 
 /**
  * Controller for updating persons.
@@ -30,7 +33,7 @@ public class UpdatePersonController {
     private TextField emailField;
     
     @FXML
-    private TextField birthDateField;
+    private DatePicker birthDatePicker;
     
     private PersonDAO dao = new PersonDAO();
     private Person currentPerson;
@@ -38,8 +41,9 @@ public class UpdatePersonController {
     /**
      * Set the person to be edited
      */
-    public void setPerson(Person person) {
-        this.currentPerson = person;
+    @FXML
+    public void initialize() {
+        currentPerson = PersonContext.getSelectedPerson();
         populateFields();
     }
     
@@ -54,7 +58,7 @@ public class UpdatePersonController {
             phoneField.setText(currentPerson.getPhoneNumber());
             addressField.setText(currentPerson.getAddress());
             emailField.setText(currentPerson.getEmailAddress());
-            birthDateField.setText(currentPerson.getBirthDate());
+            birthDatePicker.setValue(DateUtil.fromDbString(currentPerson.getBirthDate()));
         }
     }
     
@@ -76,7 +80,7 @@ public class UpdatePersonController {
         currentPerson.setPhoneNumber(phoneField.getText());
         currentPerson.setAddress(addressField.getText());
         currentPerson.setEmailAddress(emailField.getText());
-        currentPerson.setBirthDate(birthDateField.getText());
+        currentPerson.setBirthDate(DateUtil.toDbString(birthDatePicker.getValue()));
         
         // Update in database
         dao.updatePerson(currentPerson);

@@ -1,65 +1,115 @@
 package com.contactapp.db;
 
 import com.contactapp.model.Person;
-import org.junit.Before;
-import org.junit.Test;
-import java.util.List;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-/**
- * Tests for PersonDAO class.
- * Tests CRUD operations for Person objects.
- */
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
+
 public class PersonDAOTest {
-    
-    private PersonDAO dao;
-    
-    /**
-     * Set up test environment.
-     * Initialize database and create PersonDAO instance before each test.
-     */
-    @Before
-    public void setUp() {
-        // Initialize the database and create tables BEFORE each test
-        DatabaseInitializer.initializeDatabase();
-        dao = new PersonDAO();
+
+    private final PersonDAO dao = new PersonDAO();
+
+    @BeforeEach
+    public void initDb() throws Exception {
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement()) {
+
+            stmt.executeUpdate("CREATE TABLE IF NOT EXISTS person ("
+                    + "idperson INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + "lastname VARCHAR(45) NOT NULL, "
+                    + "firstname VARCHAR(45) NOT NULL, "
+                    + "nickname VARCHAR(45) NOT NULL, "
+                    + "phone_number VARCHAR(15), "
+                    + "address VARCHAR(200), "
+                    + "email_address VARCHAR(150), "
+                    + "birth_date DATE)");
+
+            stmt.executeUpdate("DELETE FROM person");
+            stmt.executeUpdate("DELETE FROM sqlite_sequence WHERE name='person'");
+
+            stmt.executeUpdate("INSERT INTO person(idperson, lastname, firstname, nickname, phone_number, address, email_address, birth_date) "
+                    + "VALUES (1, 'Doe', 'John', 'JD', '123456', 'Test Address', 'john@test.com', '2000-01-01')");
+            stmt.executeUpdate("INSERT INTO person(idperson, lastname, firstname, nickname, phone_number, address, email_address, birth_date) "
+                    + "VALUES (2, 'Smith', 'Jane', 'JS', '654321', 'Other Address', 'jane@test.com', '1995-05-15')");
+        }
     }
-    
-    /**
-     * Test inserting a person and retrieving all persons.
-     */
+
     @Test
-    public void testInsertAndRetrievePerson() {
-        Person p = new Person(
-                0,
-                "Doe",
-                "John",
-                "JD",
-                "123456",
-                "Test Address",
-                "john@test.com",
-                "2000-01-01"
-        );
-        
-        // Insert the person
+    public void shouldListPersons() {
+        // WHEN
+        List<Person> persons = dao.getAllPersons();
+
+        // THEN
+        assertThat(persons).hasSize(2);
+        assertThat(persons).extracting("firstname", "lastname", "nickname")
+                .containsOnly(
+                        tuple("John", "Doe", "JD"),
+                        tuple("Jane", "Smith", "JS")
+                );
+    }
+
+    @Test
+    public void shouldInsertPerson() throws Exception {
+        // GIVEN
+        Person p = new Person(0, "Brown", "Bob", "BB", "999999", "New Address", "bob@test.com", "1990-03-10");
+
+        // WHEN
         dao.insertPerson(p);
-        
-        // Retrieve all persons
-        List<Person> persons = dao.getAllPersons();
-        
-        // Assert that the list is not empty
-        assertFalse("Persons list should not be empty after insert", persons.isEmpty());
-        
-        // Assert that we have at least one person
-        assertTrue("Should have at least one person", persons.size() > 0);
+
+        // THEN
+        assertThat(p.getIdperson()).isNotEqualTo(0);
+
+        // AND verify database state
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM person WHERE firstname='Bob'")) {
+
+            assertThat(rs.next()).isTrue();
+            assertThat(rs.getInt("idperson")).isEqualTo(p.getIdperson());
+            assertThat(rs.getString("lastname")).isEqualTo("Brown");
+            assertThat(rs.next()).isFalse();
+        }
     }
-    
-    /**
-     * Test retrieving all persons.
-     */
+
     @Test
-    public void testGetAllPersons() {
-        List<Person> persons = dao.getAllPersons();
-        assertNotNull("Persons list should not be null", persons);
+    public void shouldUpdatePerson() throws Exception {
+        // GIVEN
+        Person p = dao.getAllPersons().get(0);
+        p.setFirstname("Johnny");
+        p.setPhoneNumber("000000");
+
+        // WHEN
+        dao.updatePerson(p);
+
+        // THEN
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM person WHERE idperson=" + p.getIdperson())) {
+
+            assertThat(rs.next()).isTrue();
+            assertThat(rs.getString("firstname")).isEqualTo("Johnny");
+            assertThat(rs.getString("phone_number")).isEqualTo("000000");
+        }
+    }
+
+    @Test
+    public void shouldDeletePerson() throws Exception {
+        // WHEN
+        dao.deletePerson(1);
+
+        // THEN
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM person WHERE idperson=1")) {
+
+            assertThat(rs.next()).isFalse();
+        }
     }
 }

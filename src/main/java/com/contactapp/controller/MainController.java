@@ -131,17 +131,15 @@ public class MainController {
             return;
         }
 
-        String details = "Contact Details:\n\n" +
-                "ID: " + selected.getIdperson() + "\n" +
-                "First Name: " + selected.getFirstname() + "\n" +
-                "Last Name: " + selected.getLastname() + "\n" +
-                "Nickname: " + selected.getNickname() + "\n" +
-                "Phone: " + selected.getPhoneNumber() + "\n" +
-                "Email: " + selected.getEmailAddress() + "\n" +
-                "Address: " + selected.getAddress() + "\n" +
-                "Birth Date: " + (selected.getBirthDate() != null ? selected.getBirthDate() : "N/A");
-
-        showAlert("Contact Details", details);
+        try {
+            // Load the update form
+            PersonContext.setSelectedPerson(selected);
+            Main.showView("ViewPersonDetails");
+            
+        } catch (Exception e) {
+            showAlert("Error", "Failed to open edit contact form: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**

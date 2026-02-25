@@ -30,51 +30,32 @@
     </top>
 
     <!-- ===== MAIN AREA ===== -->
-    <center>
-        <HBox prefHeight="383.0" prefWidth="711.0" spacing="40" styleClass="main-area">
-            <padding>
-                <Insets bottom="30" left="30" right="30" top="10" />
-            </padding>
-
-            <!-- LEFT : TABLE -->
-            <VBox HBox.hgrow="ALWAYS">
-
-                <TableView fx:id="contactsTable" prefHeight="339.0" prefWidth="505.0" styleClass="table-view" VBox.vgrow="ALWAYS">
-
-                    <columns>
-                        <TableColumn fx:id="firstNameColumn" prefWidth="140.0" text="First Name" />
-
-                        <TableColumn fx:id="lastNameColumn" prefWidth="130.0" text="Last Name" />
-
-                        <TableColumn fx:id="phoneColumn" prefWidth="170.0" text="Phone Number" />
-                    </columns>
-
-                </TableView>
-
-            </VBox>
-
-            <!-- RIGHT : BUTTON PANEL -->
-            <VBox alignment="BOTTOM_CENTER" prefHeight="329.0" prefWidth="149.0" spacing="15">
-
-                <!-- Push buttons to bottom -->
-                <Region prefHeight="107.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-
-                <Button fx:id="addButton" onAction="#handleAddContact" styleClass="btn-first" text="Add ">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin></Button>
-
-                <Button fx:id="viewButton" onAction="#handleViewDetails" styleClass="btn-primary" text="View Details" />
-
-                <Button fx:id="editButton" onAction="#handleEditContact" styleClass="btn-primary" text="Edit " />
-
-                <Button fx:id="refreshButton" onAction="#handleRefresh" styleClass="btn-secondary" text="Refresh" />
-
-                <Button fx:id="deleteButton" onAction="#handleDeleteContact" styleClass="btn-danger" text="Delete " />
-
-            </VBox>
-
-        </HBox>
-    </center>
+<center>
+    <HBox alignment="CENTER" prefHeight="383.0" prefWidth="711.0" spacing="20" styleClass="main-area">
+        <padding>
+            <Insets bottom="30" left="30" right="30" top="10" />
+        </padding>
+        
+        <!-- LEFT : TABLE -->
+        <VBox alignment="CENTER" prefWidth="380.0">
+            <TableView fx:id="contactsTable" prefHeight="339.0" prefWidth="380.0" styleClass="table-view" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="firstNameColumn" prefWidth="120.0" text="First Name" />
+                    <TableColumn fx:id="lastNameColumn" prefWidth="120.0" text="Last Name" />
+                    <TableColumn fx:id="phoneColumn" prefWidth="120.0" text="Phone Number" />
+                </columns>
+            </TableView>
+        </VBox>
+        
+        <!-- RIGHT : BUTTON PANEL -->
+        <VBox alignment="CENTER" prefWidth="150.0" spacing="15">
+            <Button fx:id="addButton" onAction="#handleAddContact" styleClass="btn-first" text="Add" />
+            <Button fx:id="viewButton" onAction="#handleViewDetails" styleClass="btn-primary" text="View Details" />
+            <Button fx:id="editButton" onAction="#handleEditContact" styleClass="btn-primary" text="Edit" />
+            <Button fx:id="refreshButton" onAction="#handleRefresh" styleClass="btn-secondary" text="Refresh" />
+            <Button fx:id="deleteButton" onAction="#handleDeleteContact" styleClass="btn-danger" text="Delete" />
+        </VBox>
+    </HBox>
+</center>
 
 </BorderPane>

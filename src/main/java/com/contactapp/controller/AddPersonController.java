@@ -2,9 +2,11 @@ package com.contactapp.controller;
 
 import com.contactapp.model.Person;
 import com.contactapp.db.PersonDAO;
+import com.contactapp.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 
 /**
  * Controller for adding new persons.
@@ -30,7 +32,7 @@ public class AddPersonController {
     private TextField emailField;
     
     @FXML
-    private TextField birthDateField;
+    private DatePicker birthDatePicker;
     
     private PersonDAO dao = new PersonDAO();
     
@@ -54,7 +56,7 @@ public class AddPersonController {
                 phoneField.getText(),
                 addressField.getText(),
                 emailField.getText(),
-                birthDateField.getText()
+                DateUtil.toDbString(birthDatePicker.getValue())
         );
         
         // Insert into database
@@ -88,7 +90,7 @@ public class AddPersonController {
         phoneField.clear();
         addressField.clear();
         emailField.clear();
-        birthDateField.clear();
+        birthDatePicker.setValue(null);
     }
     
     /**

@@ -4,13 +4,14 @@
 A JavaFX desktop application for managing contacts with a SQLite database backend. Built as a team project with role-based development.
 
 ## Features
--  View all contacts in a table
--  Add new contacts with a form
--  Edit existing contact information
--  Delete contacts from the database
--  View detailed contact information
--  Data persistence with SQLite database
--  UI with JavaFX and CSS styling
+- ✅ View all contacts in a sortable table
+- ✅ Sort contacts by clicking column headers (First Name, Last Name, Phone Number)
+- ✅ Add new contacts with a form
+- ✅ Edit existing contact information
+- ✅ Delete contacts from the database
+- ✅ View detailed contact information in a separate window
+- ✅ Data persistence with SQLite database
+- ✅ Professional UI with JavaFX and CSS styling
 
 ## Requirements
 - Java 25 (JDK)
@@ -50,7 +51,8 @@ Contact-App/
 │   │   │   ├── controller/               # JavaFX Controllers
 │   │   │   │   ├── MainController.java
 │   │   │   │   ├── AddPersonController.java
-│   │   │   │   └── UpdatePersonController.java
+│   │   │   │   ├── UpdatePersonController.java
+│   │   │   │   └── ViewDetailsController.java
 │   │   │   ├── model/                    # Data Models
 │   │   │   │   └── Person.java
 │   │   │   ├── db/                       # Database Layer
@@ -62,6 +64,7 @@ Contact-App/
 │   │   │       └── PersonContext.java
 │   │   └── resources/com/contactapp/view/
 │   │       ├── MainWindow.fxml
+│   │       ├── MainLayout.fxml
 │   │       ├── AddPersonForm.fxml
 │   │       ├── UpdatePersonForm.fxml
 │   │       ├── ViewPersonDetails.fxml
@@ -94,14 +97,50 @@ CREATE TABLE person (
 );
 ```
 
+## How to Use
+
+### Viewing Contacts
+1. Launch the application
+2. All contacts are displayed in the table
+3. **Click any column header** (First Name, Last Name, Phone Number) to **sort** contacts
+4. Click again to reverse the sort order (ascending ↔ descending)
+
+### Adding a Contact
+1. Click the **Add** button
+2. Fill in the contact details in the form
+3. Click **Save** to add the contact to the database
+4. Click **Cancel** to discard changes
+
+### Viewing Full Details
+1. Select a contact from the table
+2. Click **View Details** to see all information (nickname, email, address, birth date)
+3. Click **Back** to return to the main list
+
+### Editing a Contact
+1. Select a contact from the table
+2. Click **Edit** to open the edit form
+3. Modify any information you want to change
+4. Click **Save** to update the contact
+5. Click **Cancel** to discard changes
+
+### Deleting a Contact
+1. Select a contact from the table
+2. Click **Delete**
+3. The contact is immediately removed from the database
+4. The table automatically refreshes
+
+### Refreshing the List
+1. Click **Refresh** to reload all contacts from the database
+2. Useful if another user added/modified contacts
+
 ## Team Members & Responsibilities
 
 | Developer | Role | Components |
 |-----------|------|------------|
-| **Alpatson Cobbina SIAW** | Team Lead & UI Developer | Main Window, Form Integration, Controllers |
-| **Kelvin AWUDJA** | Database Developer | Database Layer, PersonDAO, Connection Management |
+| **Alpatson Cobbina SIAW** | Team Lead & UI Developer | Main Window, Form Integration, Controllers, Sorting Feature |
+| **Kelvin AWUDJA** | Database Developer | Database Layer, PersonDAO, Connection Management, Tests |
 | **Kwabena ANOKYE** | Model & Utility Developer | Person Model, DateUtil, Comprehensive Testing |
-| **Josephine Ama Gyanewah GYASI** | Forms Developer | Add/Edit Forms, PersonContext, Form Controllers |
+| **Josephine Ama Gyanewah GYASI** | Forms Developer | Add/Edit Forms, Detail View, PersonContext, Form Controllers |
 
 ## Development Workflow
 
@@ -132,6 +171,7 @@ Tests include:
 ## Known Issues & Future Improvements
 - [ ] Add input validation for form fields
 - [ ] Implement search/filter functionality
+- [ ] Add export to CSV feature
 - [ ] Implement data backup functionality
 
 ## License
